@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Apps Script Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Apps Script Test</h1>
+    <p>This page tests the Google Apps Script form submission functionality.</p>
+    
+    <form id="testForm">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <button type="submit">Submit Test</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <script>
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = '<p>Submitting test...</p>';
+            
+            // Google Apps Script URL
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbzoNCwmapJEdAax6IrB-arVQvcsekCrbxSUOtP3U6AONjRunMhmiDTUqNDvlL90R-D_/exec';
+            
+            // Method 1: Direct fetch (may have CORS issues)
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${encodeURIComponent(email)}&timestamp=${encodeURIComponent(new Date().toISOString())}`
+            })
+            .then(response => {
+                resultDiv.innerHTML += '<p>Fetch request completed</p>';
+                console.log('Fetch response:', response);
+            })
+            .catch(error => {
+                resultDiv.innerHTML += `<p>Fetch error: ${error.message}</p>`;
+                console.error('Fetch error:', error);
+            });
+            
+            // Method 2: Form submission (more reliable)
+            setTimeout(() => {
+                resultDiv.innerHTML += '<p>Now trying form submission method...</p>';
+                
+                // Create form
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = scriptURL;
+                form.style.display = 'none';
+                
+                // Create iframe
+                const iframe = document.createElement('iframe');
+                iframe.name = 'test-iframe';
+                iframe.style.display = 'none';
+                iframe.onload = function() {
+                    resultDiv.innerHTML += '<p>Form submission iframe loaded</p>';
+                };
+                document.body.appendChild(iframe);
+                
+                // Set form target
+                form.target = 'test-iframe';
+                
+                // Create inputs
+                const emailInput = document.createElement('input');
+                emailInput.type = 'hidden';
+                emailInput.name = 'email';
+                emailInput.value = email;
+                
+                const timestampInput = document.createElement('input');
+                timestampInput.type = 'hidden';
+                timestampInput.name = 'timestamp';
+                timestampInput.value = new Date().toISOString();
+                
+                // Append inputs to form
+                form.appendChild(emailInput);
+                form.appendChild(timestampInput);
+                
+                // Append form to body
+                document.body.appendChild(form);
+                
+                // Submit form
+                form.submit();
+                resultDiv.innerHTML += '<p>Form submitted</p>';
+                
+                // Clean up after 5 seconds
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                    resultDiv.innerHTML += '<p>Test completed. Check your Google Sheet for the test entry.</p>';
+                }, 5000);
+            }, 2000);
+        });
+    </script>
+</body>
+</html> 

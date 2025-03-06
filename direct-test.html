@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Google Apps Script Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Direct Google Apps Script Test</h1>
+    <p>This form submits directly to Google Apps Script without any JavaScript.</p>
+    
+    <!-- Direct form submission to Google Apps Script -->
+    <form action="https://script.google.com/macros/s/AKfycbxD43BeWrqVObsnmh0X5iwz1FzCRFMFaauGVnlQqZsHPbU7IlM23M0XjWevYTHdRflG/exec" method="POST">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <!-- Hidden timestamp field -->
+        <input type="hidden" name="timestamp" id="timestamp">
+        
+        <button type="submit">Submit Test</button>
+    </form>
+    
+    <script>
+        // Just set the timestamp when the page loads
+        document.getElementById('timestamp').value = new Date().toISOString();
+    </script>
+</body>
+</html> 
