@@ -3,11 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #0a1941;
+  --background: #05112a;
   --foreground: #E5E7EB;
   --primary: #60a5fa;
   --secondary: #5eead4;
   --accent: #22c55e;
+  --grid-color: rgba(96, 165, 250, 0.05);
+  --grid-size: 30px;
 }
 
 @font-face {
@@ -28,26 +30,99 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'Hack', monospace;
+  overflow-x: hidden;
+}
+
+/* Cyberpunk grid overlay */
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: var(--grid-size) var(--grid-size);
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  opacity: 0.5;
 }
 
 /* Terminal/code styling */
 @layer components {
   .glow-text {
-    text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+    text-shadow: 0 0 5px var(--primary), 0 0 15px var(--primary);
   }
 
   .glow-border {
     box-shadow: 0 0 10px var(--primary);
   }
 
-  .glow-button {
-    box-shadow: 0 0 5px var(--accent);
-    transition: all 0.2s ease;
+  .shadow-blue {
+    box-shadow: 0 5px 20px rgba(30, 58, 138, 0.1);
   }
+}
 
-  .glow-button:hover {
-    box-shadow: 0 0 10px var(--accent);
-    transform: translateY(-1px);
+/* Button with perimeter animation */
+.button-glow {
+  position: relative;
+  box-shadow: 0 0 5px var(--accent);
+  overflow: hidden;
+}
+
+.button-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  animation: animate-border 3s linear infinite;
+}
+
+.button-glow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent);
+  animation: animate-border 3s linear infinite reverse;
+}
+
+@keyframes animate-border {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(200%);
+  }
+}
+
+/* Links styling */
+a {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+a:hover::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  animation: scanline 1.5s linear infinite;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
@@ -58,7 +133,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a1941;
+  background: #05112a;
 }
 
 ::-webkit-scrollbar-thumb {
