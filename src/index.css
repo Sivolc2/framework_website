@@ -3,31 +3,69 @@
 @tailwind utilities;
 
 :root {
-  --background: #111827;
+  --background: #0a1941;
   --foreground: #E5E7EB;
+  --primary: #60a5fa;
+  --secondary: #5eead4;
+  --accent: #22c55e;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/fonts/hack-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('https://cdn.jsdelivr.net/npm/hack-font@3/build/web/fonts/hack-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: 'Hack', monospace;
+}
+
+/* Terminal/code styling */
+@layer components {
+  .glow-text {
+    text-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 10px var(--primary);
+  }
+
+  .glow-button {
+    box-shadow: 0 0 5px var(--accent);
+    transition: all 0.2s ease;
+  }
+
+  .glow-button:hover {
+    box-shadow: 0 0 10px var(--accent);
+    transform: translateY(-1px);
+  }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1F2937;
+  background: #0a1941;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #374151;
-  border-radius: 4px;
+  background: #60a5fa;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #4B5563;
+  background: #3b82f6;
 } 

@@ -79,129 +79,59 @@ MIT
 
 # Framework Zero Website
 
-This is the website for Framework Zero, featuring email subscription functionality using Google Sheets as a backend.
+This is the official website for Framework Zero, a platform focused on building infrastructure for the future where autonomous AI aligns seamlessly with human goals.
 
-## Latest Update
+## Project Structure
 
-The Google Apps Script has been successfully deployed with the following details:
-- **Deployment ID**: AKfycbzoNCwmapJEdAax6IrB-arVQvcsekCrbxSUOtP3U6AONjRunMhmiDTUqNDvlL90R-D_
-- **Web app URL**: https://script.google.com/macros/s/AKfycbzoNCwmapJEdAax6IrB-arVQvcsekCrbxSUOtP3U6AONjRunMhmiDTUqNDvlL90R-D_/exec
-- **Version**: 5
-- **Deployment Date**: Latest update with compatibility fixes
+- `public/` - Contains static assets and the main HTML file
+  - `images/` - Contains images including the Framework Zero logo
+- `src/` - Contains React components and styling
+  - `App.js` - Main application component
+  - `index.js` - Entry point for the React application
+  - `index.css` - Global styles using Tailwind CSS
 
-Recent changes:
-- Updated to use the latest Google Apps Script deployment
-- Fixed Google Apps Script compatibility issue:
-  - Removed CORS headers that were causing errors
-  - Simplified the response handling for better compatibility
-- The React app uses a form submission approach that works without CORS headers
-- Updated button functionality:
-  - "Follow" button scrolls to the email signup form
-  - "Get Involved" button links to the Google Form at https://forms.gle/NrNJ2dynq5DVMRWUA
+## Getting Started
 
-## Google Apps Script Integration Setup
+### Prerequisites
 
-Follow these steps to set up the email subscription form with Google Sheets:
+- Node.js 14+ and npm
 
-### Step 1: Create a Google Sheet
+### Installation
 
-1. Go to [Google Sheets](https://sheets.google.com) and create a new spreadsheet
-2. Name it "Framework Zero Subscribers" or something similar
-
-### Step 2: Set Up Google Apps Script
-
-1. In your Google Sheet, go to Extensions > Apps Script
-2. Delete any code in the editor and paste the contents of the `google-apps-script.js` file from this repository
-3. Save the project with a name like "Framework Zero Form Handler"
-
-### Step 3: Test the Script in the Editor
-
-1. After saving the script, run the `testDoPost` function by selecting it from the dropdown menu and clicking the "Run" button
-2. Check the execution logs (View → Logs) to make sure it's working correctly
-3. Verify that a test entry has been added to your spreadsheet
-
-### Step 4: Deploy the Google Apps Script
-
-1. Click on "Deploy" > "New deployment"
-2. Select "Web app" as the deployment type
-3. Set the following options:
-   - Execute as: "Me"
-   - Who has access: "Anyone"
-4. Click "Deploy"
-5. Copy the Web app URL that is generated
-
-### Step 5: Update Your React App
-
-1. In `src/App.js`, update the `scriptURL` variable in the `handleSubmit` function with your Web app URL from Step 4
-
-### Step 6: Test Your Integration
-
-1. Run your React app
-2. Fill out the email form and click "Follow"
-3. Check your Google Sheet to verify the data was recorded
-4. You should also receive an email notification if the email functionality is set up correctly
-
-## Implementation Details
-
-The form submission uses a reliable approach that works well with Google Apps Script:
-
-1. Creates a hidden form and iframe
-2. Submits the form to the iframe to prevent page navigation
-3. Cleans up the DOM elements after submission
-4. Shows a success message to the user
-
-This approach avoids CORS issues that can occur with direct fetch requests to Google Apps Script.
-
-### Submission Timing
-
-The form submission process typically takes less than a second to complete. The implementation includes:
-
-- Visual feedback during submission (button changes to "Processing...")
-- A short delay (800ms) before showing the success message
-- Console logs at each step of the process for debugging
-
-If the submission seems to take longer than expected, check the browser console for any error messages.
-
-## Troubleshooting
-
-### Common Issues
-
-- **Form Not Submitting**: Make sure the script URL is correct and the script is deployed as a web app
-- **Deployment Errors**: Make sure you've authorized the script properly in Google Apps Script
-- **Data Not Appearing**: Check your script logs in Apps Script editor (View → Logs in the Apps Script editor)
-- **Email Notifications Not Working**: Make sure you're logged in with the correct Google account and have granted the necessary permissions
-
-### "Invalid JSON data" Error
-
-If you encounter an "Invalid JSON data" error:
-
-1. Make sure your Google Apps Script is properly deployed as a web app
-2. Run the `testDoPost` function in the Apps Script editor to verify it works
-3. Check the Apps Script logs for any errors (View → Logs in the Apps Script editor)
-4. Try redeploying the script with a new version number
-5. Ensure your spreadsheet exists and is accessible to the account running the script
-
-### "Data Not Appearing in Google Sheets" Issue
-
-If form submissions aren't appearing in your Google Sheet:
-
-1. **Check Script Permissions**: Make sure your Google Apps Script has permission to access and modify the spreadsheet
-2. **Verify Script Deployment**: Ensure the script is properly deployed as a web app with "Anyone" access
-3. **Run the Test Function**: Execute the `testDoPost` function in the Apps Script editor to verify it can write to the sheet
-4. **Check Error Logs**: Look for any errors in the Apps Script logs (View → Logs)
-5. **Verify Sheet Name**: The script looks for a sheet named "Submissions" - make sure it exists or can be created
-6. **Check Browser Console**: Look for any submission errors in your browser's developer console
-
-Common error: `TypeError: ContentService.createTextOutput(...).setMimeType(...).setHeader is not a function`
-- Solution: Use the simplified version of the script without CORS headers
-
-## Development
-
-To run the website locally:
-
-```bash
+1. Clone the repository
+2. Install dependencies:
+```
 npm install
+```
+
+### Development
+
+Run the development server:
+```
 npm start
 ```
 
-The site will be available at http://localhost:3000 
+### Building for Production
+
+Build the static files:
+```
+npm run build
+```
+
+## Design Philosophy
+
+The website follows a minimalist design approach to communicate the core concepts of Framework Zero:
+
+1. Symbiosis between human and AI preferences
+2. Preference aggregation in real-world applications
+3. Transparent and shared decision-making
+
+## Technologies Used
+
+- React
+- Tailwind CSS
+- Lucide Icons
+
+## Contact
+
+For inquiries, contact hello@frameworkzero.org 
