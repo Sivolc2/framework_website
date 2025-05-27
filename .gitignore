@@ -65,3 +65,4 @@ next-env.d.ts
 
 # Cache
 .swc/
+repo_contents.txt
