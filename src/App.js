@@ -131,7 +131,8 @@ function App() {
                   <h4 className="text-2xl font-bold text-cyan-400 mb-2">Clovis Vinant-Tang</h4>
                   <p className="text-lg text-pink-500 mb-4 italic">"Grand Stratego"</p>
                   <p className="text-gray-300 leading-relaxed">
-                    With 5+ years in satellite network planning, Clovis brings expertise in complex systems. Background in Physics & Economics from McGill University. A sci-fi galaxy brain, passionate about building the future.
+                    Systems architect with 5+ years in satellite network planning.<br />
+                    Physics & Economics background from McGill University.
                   </p>
                 </div>
                 <div className="border border-cyan-400/30 bg-black/30 p-8 relative">
@@ -140,7 +141,8 @@ function App() {
                   <h4 className="text-2xl font-bold text-cyan-400 mb-2">Connie Li</h4>
                   <p className="text-lg text-pink-500 mb-4 italic">"RPG Princess"</p>
                   <p className="text-gray-300 leading-relaxed">
-                    A 10+ year veteran as a Tumblr engineering lead, Connie excels in user-centric design and scaling platforms. Holds an Economics degree from Princeton University. Meme culture connoisseur and expert in digital engagement.
+                    Engineering leader with 10+ years at Tumblr specializing in user-centric design.<br />
+                    Platform scaling expertise, Economics degree from Princeton University.
                   </p>
                 </div>
               </div>
